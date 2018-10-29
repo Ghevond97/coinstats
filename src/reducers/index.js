@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
-import stats from './fetchStats';
 
-export default combineReducers({ stats });
+import { requestStatus, stats } from './fetchStats';
+
+export default combineReducers({ stats, requestStatus });

@@ -1,4 +1,4 @@
-import { REQUEST_STATS, RECEIVE_STATS } from '../constants';
+import { REQUEST_STATS, RECEIVE_STATS, ERROR_STATS } from '../constants';
 
 const requestStats = () => {
   return {
@@ -13,14 +13,19 @@ const receivedStats = json => {
   };
 };
 
+const errorMessage = error => {
+  return {
+    type: ERROR_STATS,
+    payload: error
+  };
+};
+
 export const getStats = () => {
   return dispatch => {
     dispatch(requestStats());
     return fetch(`https://api.coinmarketcap.com/v2/ticker/`)
       .then(response => response.json())
       .then(json => dispatch(receivedStats(json.data)))
-      .catch(e => {
-        console.log(e);
-      });
+      .catch(e => dispatch(errorMessage(e)));
   };
 };

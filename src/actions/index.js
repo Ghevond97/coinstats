@@ -1,2 +1,2 @@
-import getStats from './fetchStats';
-export {getStats};
+import { getStats } from './fetchStats';
+export { getStats };
